@@ -2,8 +2,8 @@ app.directive("slider", function () {
     return {
         link: function (scope, elem, attr) {
             scope.elem = elem[0];
-			scope.config.IsMulti = attr["IsRange"] === "true";
-			$scope.maxAllowedSelections = attr["maxAllowedSelections"] === undefined ? 99999 : parseInt(attr["maxAllowedSelections"]);
+			scope.config = {IsMulti : attr["isRange"] === "true"};
+			scope.maxAllowedSelections = attr["maxAllowedSelections"] === undefined ? 99999 : parseInt(attr["maxAllowedSelections"]);
         },
         scope:true,
         template:
