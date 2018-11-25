@@ -2,15 +2,19 @@
 <html>
 	<head>
 		<title>Slider</title>
-		<link rel="stylesheet" href="style.css" />
 		<link rel="stylesheet" href="filter_panel_slider.css" />		
 		<script src="angular.js"></script>
 		<script src="script.js"></script>
 		<script src="slider.js"></script>
 	</head>
 	<body ng-app="myApp" ng-controller="sliderController">
+		<h3>Single Selection</h3>
 		<div class="container" style="width:300px;height:40px;border:1px solid;">
 			<slider></slider>
+		</div>
+		<h3>Range slider</h3>
+		<div class="container" style="width:300px;height:40px;border:1px solid;">
+			<slider is-range="true"></slider>
 		</div>
 	</body>
 </html>
