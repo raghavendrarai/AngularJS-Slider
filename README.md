@@ -3,7 +3,7 @@
 This is a very simple slider for angularjs 1.x applications.
 
 ## Demo
-http://raghavendrarai.github.io/SimpleDragAndDrop
+https://raghavendrarai.github.io/AngularJS-Slider/
 
 ### Intergration
 * Add directive <slider></slider> in the html
