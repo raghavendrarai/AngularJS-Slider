@@ -1,11 +1,10 @@
 app.directive("slider", function () {
     return {
+        scope:true,
         link: function (scope, elem, attr) {
             scope.elem = elem[0];
 			scope.config = {IsMulti : attr["isRange"] === "true"};
-			scope.maxAllowedSelections = attr["maxAllowedSelections"] === undefined ? 99999 : parseInt(attr["maxAllowedSelections"]);
         },
-        scope:true,
         template:
             '<div ng-controller="scrollController" class="srocll_container" ng-class="$parent.$parent.item.Name + $parent.item.Name + \'_srocll_container\'" ng-click="$event.stopPropagation();">'
             + '<div class="srocll_container_inner vertical_center" ng-class="$parent.$parent.item.Name + $parent.item.Name + \'_srocll_container_inner\'" ng-mousemove="mouseMove($event)" ng-mouseup="mouseDown(false)" ng-mouseleave="mouseDown(false)" ng-style="sliderStyle">'
@@ -47,11 +46,11 @@ app.controller('scrollController', function ($scope) {
     //$scope.config = { IsMulti: true };
 
     $scope.numberOfTicks = $scope.length < maxNumberOfTicks ? $scope.length - 1 : maxNumberOfTicks - 1;
-    //$scope.maxAllowedSelections = 9999;
+    $scope.maxAllowedSelections = 9999;
     $scope.stepWidth = autoFit ? 100 / $scope.numberOfTicks : stepWidthValue;
     $scope.stepValue = 100.0 / $scope.numberOfTicks;
     $scope.leftIndex = 0;
-    $scope.rightIndex = $scope.maxAllowedSelections;
+    $scope.rightIndex = $scope.maxAllowedSelections > $scope.length ? $scope.length : $scope.maxAllowedSelections;
     $scope.position = { left: 0, right: 100 };
 
     $scope.sliderStyle = {};
@@ -97,8 +96,8 @@ app.controller('scrollController', function ($scope) {
             $scope.fillStyle = { left: ($scope.leftIndex * $scope.stepValue) + "%", right: (100 - $scope.rightIndex * $scope.stepValue) + "%" };
             adjustWhenSamePosition();
         }
-    }
-
+    };	
+	
     $scope.onChangeValue = function () {
         adjustWhenSamePosition();
         $scope.$parent.timeperiodChanged($scope.timeperiodData, $scope.leftIndex, ($scope.config.IsMulti ? $scope.rightIndex : $scope.leftIndex), $scope.$parent.parent_list, $scope.config.IsMulti);
